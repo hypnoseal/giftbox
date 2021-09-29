@@ -2,7 +2,7 @@
 
 This repository contains an example of a non-working generic in Rust called `GiftBox`. Within the example, a 
 `GiftBox<T>` enum is defined with two options `Gifts(T)` and `Empty`. The `GiftBox` is meant to be able to contain any 
-type of `Gifts(T)`. However, in this example, T is never actually declared and no type is ever specified.
+type of `Gifts(T)`. However, in this example, `T` is never actually declared and no type is ever specified.
 
 In this example, only an `Empty` gift box is declared with `GiftBox::Empty`. The example purposefully does not declare a
 gift box with any contents. This is to make the compiler complain about not being able to infer the type `T`.
