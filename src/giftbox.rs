@@ -1,4 +1,4 @@
-//! This module defines the [`GiftWrap`] enum which is the base generic type used in this crate. It
+//! This module defines the [`GiftBox`] enum which is the base generic type used in this crate. It
 //! represents a real-life gift box which can hold any gift that can fit within the box. The enum
 //! has two variants:
 //!
