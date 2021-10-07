@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "gift_box_generic"
-version = "0.1.0"
+name = "giftbox"
+version = "0.1.1"
