@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["GiftBox","A `GiftBox` type for Rust that could contain any type of gift that can be represented as a Rust type."]]});

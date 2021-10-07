@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["giftbox"] = [{"text":"impl&lt;T:&nbsp;<a class=\"trait\" href=\"https://doc.rust-lang.org/1.55.0/core/clone/trait.Clone.html\" title=\"trait core::clone::Clone\">Clone</a>&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.55.0/core/clone/trait.Clone.html\" title=\"trait core::clone::Clone\">Clone</a> for <a class=\"enum\" href=\"giftbox/giftbox/enum.GiftBox.html\" title=\"enum giftbox::giftbox::GiftBox\">GiftBox</a>&lt;T&gt;","synthetic":false,"types":["giftbox::giftbox::GiftBox"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

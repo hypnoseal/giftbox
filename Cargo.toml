@@ -2,5 +2,10 @@
 name = "giftbox"
 version = "0.1.1"
 edition = "2018"
+readme = "README.md"
+repository = "https://github.com/hypnoseal/giftbox"
+license = "MIT"
+keywords = ["gift", "box", "beginner", "instructional", "tutorial"]
+categories = ["data-structures"]
 
 [dependencies]
