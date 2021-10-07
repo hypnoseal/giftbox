@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Patterns","The `Patterns` enum represents various different Patterns that could be used by [`crate::giftwrap::GiftWrap`]. Though it is used by the `GiftWrap`, the `Patterns` enum can be used anywhere in Rust."]]});

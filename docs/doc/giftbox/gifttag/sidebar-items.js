@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["GiftTag","The `GiftTag` struct represents a gift tag that could be included with a gift’s wrapping. It is used by the `GiftWrap` struct to include a recipient, a sender, and a message. Though it is utilized by `GiftWrap`, this struct can be used anywhere in Rust."]]});
