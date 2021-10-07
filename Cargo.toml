@@ -2,6 +2,7 @@
 name = "giftbox"
 version = "0.1.1"
 edition = "2018"
+description = "A fun Rust crate called `giftbox` to help Rustlings learn and explore generics."
 readme = "README.md"
 repository = "https://github.com/hypnoseal/giftbox"
 license = "MIT"
