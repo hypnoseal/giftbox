@@ -164,7 +164,7 @@ use std::fmt::*;
 /// // ^^^This would not compile!^^^
 ///
 /// let mut int_box = GiftBox::Gifts(42);
-/// num_box = GiftBox::Gifts("Words");
+/// int_box = GiftBox::Gifts("Words");
 /// // ^^^This would not compile as well!^^^
 /// ```
 ///
