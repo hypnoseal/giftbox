@@ -134,7 +134,7 @@
 //! use giftbox::giftbox::GiftBox;
 //! use giftbox::gifttag::GiftTag;
 //! use giftbox::giftwrap::GiftWrap;
-//! use giftbox::patterns::Patterns;
+//! use giftbox::pattern::{ Pattern, Color };
 //! let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
 //! let tag = GiftTag::write(
 //!     "Bob".to_string(),
@@ -142,7 +142,7 @@
 //!     "Happy Cake Day!".to_string()
 //! );
 //! let wrapped_box = filled_box.wrap(
-//!     Patterns::Polkadots,
+//!     Pattern::Polkadots { background: Color::White, foreground: Color::Black },
 //!     true,
 //!     Some(tag)
 //! );
@@ -153,7 +153,7 @@
 //!              contents:{
 //!                  GiftBox::Gifts(["Toys", "Candy", "Money"])
 //!              },
-//!              pattern: Patterns::Polkadots,
+//!              pattern: Pattern::Polkadots { background: Color::White, foreground: Color::Black },
 //!              has_bow: true,
 //!              tag: Some(
 //!                  GiftTag {
@@ -170,7 +170,7 @@
 pub mod giftbox;
 pub mod gifttag;
 pub mod giftwrap;
-pub mod patterns;
+pub mod pattern;
 
 #[cfg(test)]
 mod tests {}

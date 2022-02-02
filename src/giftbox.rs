@@ -11,7 +11,7 @@
 //! use giftbox::giftbox::GiftBox;
 //! use giftbox::gifttag::GiftTag;
 //! use giftbox::giftwrap::GiftWrap;
-//! use giftbox::patterns::Patterns;
+//! use giftbox::pattern::{ Pattern, Color };
 //! let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
 //! let tag = GiftTag::write(
 //!     "Bob".to_string(),
@@ -19,7 +19,7 @@
 //!     "Happy Cake Day!".to_string()
 //! );
 //! let wrapped_box = filled_box.wrap(
-//!     Patterns::Polkadots,
+//!     Pattern::Polkadots { background: Color::White, foreground: Color::Black },
 //!     true,
 //!     Some(tag)
 //! );
@@ -30,7 +30,7 @@
 //!              contents:{
 //!                  GiftBox::Gifts(["Toys", "Candy", "Money"])
 //!              },
-//!              pattern: Patterns::Polkadots,
+//!              pattern: Pattern::Polkadots { background: Color::White, foreground: Color::Black },
 //!              has_bow: true,
 //!              tag: Some(
 //!                  GiftTag {
@@ -47,7 +47,7 @@
 use crate::giftbox::GiftBox::*;
 use crate::gifttag::GiftTag;
 use crate::giftwrap::GiftWrap;
-use crate::patterns::Patterns;
+use crate::pattern::Pattern;
 use std::fmt::*;
 
 /// A `GiftBox` type for Rust that could contain any type of gift that can be represented as a Rust
@@ -298,7 +298,7 @@ impl<T> GiftBox<T> {
     /// use giftbox::giftbox::GiftBox;
     /// use giftbox::gifttag::GiftTag;
     /// use giftbox::giftwrap::GiftWrap;
-    /// use giftbox::patterns::Patterns;
+    /// use giftbox::pattern::{ Pattern, Color };
     /// let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
     /// let tag = GiftTag::write(
     ///     "Bob".to_string(),
@@ -306,7 +306,7 @@ impl<T> GiftBox<T> {
     ///     "Happy Cake Day!".to_string()
     /// );
     /// let wrapped_box = filled_box.wrap(
-    ///     Patterns::Polkadots,
+    ///     Pattern::Striped { first_stripe: Color::Blue, second_stripe: Color::Red },
     ///     true,
     ///     Some(tag)
     /// );
@@ -317,7 +317,7 @@ impl<T> GiftBox<T> {
     ///              contents:{
     ///                  GiftBox::Gifts(["Toys", "Candy", "Money"])
     ///              },
-    ///              pattern: Patterns::Polkadots,
+    ///              pattern: Pattern::Striped { first_stripe: Color::Blue, second_stripe: Color::Red },
     ///              has_bow: true,
     ///              tag: Some(
     ///                  GiftTag {
@@ -332,7 +332,7 @@ impl<T> GiftBox<T> {
     /// ```
     pub fn wrap(
         self,
-        pattern: Patterns,
+        pattern: Pattern,
         has_bow: bool,
         tag: Option<GiftTag>,
     ) -> GiftWrap<GiftBox<T>> {

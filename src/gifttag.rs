@@ -20,7 +20,7 @@
 //! ```
 //! use giftbox::giftbox::GiftBox;
 //! use giftbox::gifttag::GiftTag;
-//! use giftbox::patterns::Patterns;
+//! use giftbox::pattern::{ Pattern, Color };
 //! let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
 //! let tag = GiftTag::write(
 //!     "Bob".to_string(),
@@ -28,7 +28,7 @@
 //!     "Happy Cake Day!".to_string()
 //! );
 //! let wrapped_box = filled_box.wrap(
-//!     Patterns::Polkadots,
+//!     Pattern::Polkadots { background: Color::White, foreground: Color::Black },
 //!     true,
 //!     Some(tag)
 //! );

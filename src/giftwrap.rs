@@ -13,7 +13,7 @@
 //! ```
 //! use giftbox::giftbox::GiftBox;
 //! use giftbox::gifttag::GiftTag;
-//! use giftbox::patterns::Patterns;
+//! use giftbox::pattern::{ Pattern, Color };
 //! let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
 //! let tag = GiftTag::write(
 //!     "Bob".to_string(),
@@ -21,7 +21,7 @@
 //!     "Happy Cake Day!".to_string()
 //! );
 //! let wrapped_box = filled_box.wrap(
-//!     Patterns::Polkadots,
+//!     Pattern::Polkadots { background: Color::White, foreground: Color::Black },
 //!     true,
 //!     Some(tag)
 //! );
@@ -32,7 +32,7 @@
 //! todo!() Turn GiftWrap into a trait.
 
 use crate::gifttag::GiftTag;
-use crate::patterns::Patterns;
+use crate::pattern::Pattern;
 use std::fmt::*;
 
 /// A `GiftWrap` type for Rust which represents gift wrap that can be wrapped around any other
@@ -51,10 +51,10 @@ use std::fmt::*;
 /// ```
 /// use giftbox::giftbox::GiftBox;
 /// use giftbox::giftwrap::GiftWrap;
-/// use giftbox::patterns::Patterns;
+/// use giftbox::pattern::{ Pattern, Color };
 /// let wrapped_string_gift = GiftWrap {
 ///     contents: GiftBox::Gifts("String of words".to_string()),
-///     pattern: Patterns::Sparkles,
+///     pattern: Pattern::Sparkles { background: Color::White, foreground: Color::Green },
 ///     has_bow: true,
 ///     tag: None
 /// };
@@ -68,7 +68,7 @@ use std::fmt::*;
 /// ```
 /// use giftbox::giftbox::GiftBox;
 /// use giftbox::gifttag::GiftTag;
-/// use giftbox::patterns::Patterns;
+/// use giftbox::pattern::{ Pattern, Color };
 /// let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
 /// let tag = GiftTag::write(
 ///     "Bob".to_string(),
@@ -76,7 +76,7 @@ use std::fmt::*;
 ///     "Happy Cake Day!".to_string()
 /// );
 /// let wrapped_box = filled_box.wrap(
-///     Patterns::Polkadots,
+///     Pattern::Polkadots { background: Color::White, foreground: Color::Black },
 ///     true,
 ///     Some(tag)
 /// );
@@ -88,7 +88,7 @@ use std::fmt::*;
 #[derive(Debug, PartialEq)]
 pub struct GiftWrap<T> {
     pub contents: T,
-    pub pattern: Patterns,
+    pub pattern: Pattern,
     pub has_bow: bool,
     pub tag: Option<GiftTag>,
 }
@@ -106,7 +106,7 @@ impl<T> GiftWrap<T> {
     /// ```
     /// use giftbox::giftbox::GiftBox;
     /// use giftbox::gifttag::GiftTag;
-    /// use giftbox::patterns::Patterns;
+    /// use giftbox::pattern::{ Pattern, Color };
     /// let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
     /// let tag = GiftTag::write(
     ///     "Bob".to_string(),
@@ -114,7 +114,7 @@ impl<T> GiftWrap<T> {
     ///     "Happy Cake Day!".to_string()
     /// );
     /// let wrapped_box = filled_box.wrap(
-    ///     Patterns::Polkadots,
+    ///     Pattern::Polkadots { background: Color::White, foreground: Color::Black },
     ///     true,
     ///     Some(tag)
     /// );
@@ -139,7 +139,7 @@ impl<T> GiftWrap<T> {
     /// ```
     /// use giftbox::giftbox::GiftBox;
     /// use giftbox::gifttag::GiftTag;
-    /// use giftbox::patterns::Patterns;
+    /// use giftbox::pattern::{ Pattern, Color };
     /// let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
     /// let tag = GiftTag::write(
     ///     "Bob".to_string(),
@@ -147,7 +147,7 @@ impl<T> GiftWrap<T> {
     ///     "Happy Cake Day!".to_string()
     /// );
     /// let wrapped_box = filled_box.wrap(
-    ///     Patterns::Polkadots,
+    ///     Pattern::Polkadots { background: Color::White, foreground: Color::Black },
     ///     true,
     ///     Some(tag)
     /// );
@@ -168,6 +168,7 @@ impl<T> GiftWrap<T> {
 mod test {
     use super::*;
     use crate::giftbox::GiftBox;
+    use crate::pattern::Color;
 
     #[test]
     fn wrap_gift_box_with_tag() {
@@ -177,11 +178,12 @@ mod test {
             "Sally".to_string(),
             "Happy Cake Day!".to_string(),
         );
-        let wrapped_box = filled_box.wrap(Patterns::Polkadots, true, Some(tag));
+        let pattern = Pattern::Polkadots { background: Color::Red, foreground: Color::Blue };
+        let wrapped_box = filled_box.wrap(pattern, true, Some(tag));
         assert_eq!(wrapped_box, {
             GiftWrap {
                 contents: { GiftBox::Gifts(["Toys", "Candy", "Money"]) },
-                pattern: Patterns::Polkadots,
+                pattern: Pattern::Polkadots { background: Color::Red, foreground: Color::Blue },
                 has_bow: true,
                 tag: Some(GiftTag {
                     recipient: "Bob".to_string(),
@@ -200,7 +202,8 @@ mod test {
             "Sally".to_string(),
             "Happy Cake Day!".to_string(),
         );
-        let wrapped_box = filled_box.wrap(Patterns::Polkadots, true, Some(tag));
+        let pattern = Pattern::Striped { first_stripe: Color::Green, second_stripe: Color::Blue };
+        let wrapped_box = filled_box.wrap(pattern, true, Some(tag));
         let unwrapped_box = wrapped_box.unwrap();
         assert_eq!(unwrapped_box, filled_box);
     }
@@ -213,7 +216,8 @@ mod test {
             "Sally".to_string(),
             "Happy Cake Day!".to_string(),
         );
-        let wrapped_box = filled_box.wrap(Patterns::Polkadots, true, Some(tag));
+        let pattern = Pattern::Cloth { color: Color::Blue };
+        let wrapped_box = filled_box.wrap(pattern, true, Some(tag));
         assert_eq!(wrapped_box.unwrap().open(), ["Toys", "Candy", "Money"]);
     }
 
@@ -225,7 +229,8 @@ mod test {
             "Sally".to_string(),
             "Happy Cake Day!".to_string(),
         );
-        let wrapped_box = filled_box.wrap(Patterns::Polkadots, true, Some(tag));
+        let pattern = Pattern::NewsPaper;
+        let wrapped_box = filled_box.wrap(pattern, true, Some(tag));
         assert_eq!(
             wrapped_box.read_tag(),
             "To: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
@@ -236,7 +241,7 @@ mod test {
     fn attempt_to_read_none_tag() {
         let wrapped_nothing = GiftWrap {
             contents: (),
-            pattern: Patterns::KraftPaper,
+            pattern: Pattern::KraftPaper { color: Color::Red },
             has_bow: false,
             tag: None,
         };
