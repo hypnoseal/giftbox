@@ -111,7 +111,7 @@ use std::fmt::*;
 /// use giftbox::giftbox::GiftBox;
 /// let empty_box = GiftBox::Empty;
 /// empty_box.open()
-/// // ^^^This will cause a panic at compile time.^^^
+/// // ^^^This will cause a panic at runtime.^^^
 /// ```
 ///
 /// You can also create an empty box by filling a box with a `None` from [`std::option::Option`].
@@ -218,10 +218,7 @@ impl<T> GiftBox<T> {
     ///  assert_eq!(empty_box, GiftBox::Empty);
     /// ```
     pub fn fill(t: Option<T>) -> GiftBox<T> {
-        match t {
-            Some(t) => GiftBox::Gifts(t),
-            None => GiftBox::Empty,
-        }
+        GiftBox::from(t)
     }
 
     /// The `fill_keeping_some(t: Option<T>)` method accepts an
@@ -341,6 +338,16 @@ impl<T> GiftBox<T> {
             pattern,
             has_bow,
             tag,
+        }
+    }
+}
+
+/// Implementation of From trait for GiftBox
+impl<T> From<Option<T>> for GiftBox<T> {
+    fn from(gift: Option<T>) -> Self {
+        match gift {
+            Some(t) => GiftBox::Gifts(t),
+            None => GiftBox::Empty,
         }
     }
 }
