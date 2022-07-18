@@ -98,7 +98,7 @@ use std::fmt::*;
 /// use giftbox::giftbox::GiftBox;
 /// let another_empty_box = GiftBox::from(None);
 /// another_empty_box.open()
-/// // ^^^This will also cause a panic at compile time.^^^
+/// // ^^^This will also cause a panic at runtime.^^^
 /// ```
 ///
 /// # About the Contents of a `GiftBox` and Memory Allocation

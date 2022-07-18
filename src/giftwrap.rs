@@ -82,7 +82,7 @@ use std::fmt::*;
 /// );
 /// assert_eq!(
 ///     wrapped_box.read_tag(),
-///     "To: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
+///     "You read the nice Gift Tag and it says:\nTo: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
 /// );
 /// ```
 #[derive(Debug, PartialEq)]
@@ -153,7 +153,7 @@ impl<T> GiftWrap<T> {
     /// );
     /// assert_eq!(
     ///     wrapped_box.read_tag(),
-    ///     "To: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
+    ///     "You read the nice Gift Tag and it says:\nTo: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
     /// );
     /// ```
     pub fn read_tag(self) -> String {
@@ -233,7 +233,7 @@ mod test {
         let wrapped_box = filled_box.wrap(pattern, true, Some(tag));
         assert_eq!(
             wrapped_box.read_tag(),
-            "To: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
+            "You read the nice Gift Tag and it says:\nTo: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
         );
     }
 

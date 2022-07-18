@@ -36,6 +36,7 @@
 //! assert_eq!(unwrapped_box, filled_box);
 //! ```
 
+use std::fmt;
 use std::fmt::*;
 
 /// The `GiftTag` struct represents a gift tag that could be included with a gift's wrapping. It is
@@ -69,7 +70,7 @@ use std::fmt::*;
 ///      "Happy Cake Day!".to_string()
 /// );
 /// assert_eq!(tag.read(),
-/// "To: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
+/// "You read the nice Gift Tag and it says:\nTo: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
 /// );
 /// ```
 #[derive(Debug, PartialEq)]
@@ -129,14 +130,23 @@ impl GiftTag {
     ///      "Happy Cake Day!".to_string()
     /// );
     /// assert_eq!(tag.read(),
-    /// "To: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
+    /// "You read the nice Gift Tag and it says:\nTo: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
     /// );
     /// ```
     ///
     pub fn read(self) -> String {
-        format!(
-            "To: {},\nFrom: {},\nMessage: {}",
-            self.recipient, self.sender, self.message
+        // format!(
+        //     "To: {},\nFrom: {},\nMessage: {}",
+        //     self.recipient, self.sender, self.message
+        // )
+        format!("You read the nice Gift Tag and it says:\n{}", self)
+    }
+}
+
+impl fmt::Display for GiftTag {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        write!(f, "To: {},\nFrom: {},\nMessage: {}",
+               self.recipient, self.sender, self.message
         )
     }
 }
