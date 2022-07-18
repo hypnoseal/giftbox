@@ -14,7 +14,7 @@
 //! use giftbox::giftbox::GiftBox;
 //! use giftbox::gifttag::GiftTag;
 //! use giftbox::pattern::{ Pattern, Color };
-//! let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+//! let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
 //! let tag = GiftTag::write(
 //!     "Bob".to_string(),
 //!     "Sally".to_string(),
@@ -69,7 +69,7 @@ use std::fmt::*;
 /// use giftbox::giftbox::GiftBox;
 /// use giftbox::gifttag::GiftTag;
 /// use giftbox::pattern::{ Pattern, Color };
-/// let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+/// let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
 /// let tag = GiftTag::write(
 ///     "Bob".to_string(),
 ///     "Sally".to_string(),
@@ -107,7 +107,7 @@ impl<T> GiftWrap<T> {
     /// use giftbox::giftbox::GiftBox;
     /// use giftbox::gifttag::GiftTag;
     /// use giftbox::pattern::{ Pattern, Color };
-    /// let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+    /// let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
     /// let tag = GiftTag::write(
     ///     "Bob".to_string(),
     ///     "Sally".to_string(),
@@ -140,7 +140,7 @@ impl<T> GiftWrap<T> {
     /// use giftbox::giftbox::GiftBox;
     /// use giftbox::gifttag::GiftTag;
     /// use giftbox::pattern::{ Pattern, Color };
-    /// let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+    /// let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
     /// let tag = GiftTag::write(
     ///     "Bob".to_string(),
     ///     "Sally".to_string(),
@@ -172,7 +172,7 @@ mod test {
 
     #[test]
     fn wrap_gift_box_with_tag() {
-        let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+        let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
         let tag = GiftTag::write(
             "Bob".to_string(),
             "Sally".to_string(),
@@ -196,7 +196,7 @@ mod test {
 
     #[test]
     fn wrap_and_unwrap_gift_box() {
-        let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+        let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
         let tag = GiftTag::write(
             "Bob".to_string(),
             "Sally".to_string(),
@@ -210,7 +210,7 @@ mod test {
 
     #[test]
     fn wrap_and_open_gift_box_with_tag() {
-        let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+        let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
         let tag = GiftTag::write(
             "Bob".to_string(),
             "Sally".to_string(),
@@ -223,7 +223,7 @@ mod test {
 
     #[test]
     fn write_and_read_tag() {
-        let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+        let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
         let tag = GiftTag::write(
             "Bob".to_string(),
             "Sally".to_string(),

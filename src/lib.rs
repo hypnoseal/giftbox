@@ -135,7 +135,7 @@
 //! use giftbox::gifttag::GiftTag;
 //! use giftbox::giftwrap::GiftWrap;
 //! use giftbox::pattern::{ Pattern, Color };
-//! let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+//! let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
 //! let tag = GiftTag::write(
 //!     "Bob".to_string(),
 //!     "Sally".to_string(),

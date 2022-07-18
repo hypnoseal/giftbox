@@ -12,7 +12,7 @@
 //! use giftbox::gifttag::GiftTag;
 //! use giftbox::giftwrap::GiftWrap;
 //! use giftbox::pattern::{ Pattern, Color };
-//! let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+//! let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
 //! let tag = GiftTag::write(
 //!     "Bob".to_string(),
 //!     "Sally".to_string(),
@@ -74,32 +74,11 @@ use std::fmt::*;
 ///
 /// # Methods
 ///
-/// ## fill()
-/// Fill a `GiftBox` with the [`GiftBox::fill()`] method. Example:
-/// ```
-/// use giftbox::giftbox::GiftBox;
-/// let filled_gift_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
-/// ```
-/// This will create an instance of a filled gift box called `filled_gift_box`. The
-/// `filled_gift_box` is the same as:
-/// ```text
-/// GiftBox::Gifts(["Toys", "Candy", "Money"])
-/// ```
-///
-/// ## fill_keeping_some()
-/// You can fill a box and keep some for yourself and makes the contents of `GiftBox` contain
-/// keep the [`std::option::Option`] too, with the [`GiftBox::fill_keeping_some()`] method:
-/// ```
-/// use giftbox::giftbox::GiftBox;
-/// let some_filled_box = GiftBox::fill_keeping_some(Some("Chocolate"));
-/// assert_eq!(some_filled_box.open(), Some("Chocolate"));
-/// ```
-///
 /// ## open()
 /// You can open a `GiftBox` with [`GiftBox::open()`] to get the contents of the `GiftBox`. Example:
 /// ```
 /// use giftbox::giftbox::GiftBox;
-/// let filled_gift_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+/// let filled_gift_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
 /// let gifts = filled_gift_box.open();
 /// assert_eq!(gifts, ["Toys", "Candy", "Money"]);
 /// ```
@@ -117,7 +96,7 @@ use std::fmt::*;
 /// You can also create an empty box by filling a box with a `None` from [`std::option::Option`].
 /// ```should_panic
 /// use giftbox::giftbox::GiftBox;
-/// let another_empty_box = GiftBox::fill(None);
+/// let another_empty_box = GiftBox::from(None);
 /// another_empty_box.open()
 /// // ^^^This will also cause a panic at compile time.^^^
 /// ```
@@ -194,64 +173,6 @@ pub enum GiftBox<T> {
 }
 
 impl<T> GiftBox<T> {
-    /// The `fill(t: Option<T>)` method accepts an [`std::option::Option`] and returns a `GiftBox`
-    /// with either `GiftBox::Gifts(t)` if `Some(t)` was provided or a `GiftBox::Empty` if
-    /// `None` is provided.
-    ///
-    /// # Arguments
-    /// * `t: Option<T>` - `t` accepts an [`std::option::Option`]
-    ///
-    /// # Returns
-    /// Returns a `GiftBox<T>`.
-    ///
-    /// # Example
-    /// Filling a `GiftBox` with `Some(T)`:
-    /// ```
-    /// use giftbox::giftbox::GiftBox;
-    /// let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
-    /// assert_eq!(filled_box, GiftBox::Gifts(["Toys", "Candy", "Money"]));
-    /// ```
-    /// Filling a `GiftBox` with `None`:
-    /// ```
-    /// use giftbox::giftbox::GiftBox;
-    /// let empty_box: GiftBox<()> = GiftBox::fill(None);
-    ///  assert_eq!(empty_box, GiftBox::Empty);
-    /// ```
-    pub fn fill(t: Option<T>) -> GiftBox<T> {
-        GiftBox::from(t)
-    }
-
-    /// The `fill_keeping_some(t: Option<T>)` method accepts an
-    /// [`std::option::Option`] and returns a `GiftBox` with either `GiftBox::Gifts(Some(t))` if
-    /// `Some(t)` was provided or a `GiftBox::Empty` if `None` is provided.
-    ///
-    /// # Arguments
-    /// * `t: Option<T>` - `t` accepts an [`std::option::Option`]
-    ///
-    /// # Returns
-    /// Returns a `GiftBox<Option<T>>`.
-    ///
-    /// # Example
-    /// Filling a `GiftBox` with `Some(T)`:
-    /// ```
-    /// use giftbox::giftbox::GiftBox;
-    /// let filled_box = GiftBox::fill_keeping_some(Some(["Toys", "Candy", "Money"]));
-    /// assert_eq!(filled_box, GiftBox::Gifts(Some(["Toys", "Candy", "Money"])));
-    /// ```
-    /// Filling a `GiftBox` with `None`:
-    /// ```<T>
-    /// use giftbox::giftbox::GiftBox;
-    /// use std::option::Option;
-    /// let empty_box: GiftBox<Option<T>> = GiftBox::fill_keeping_some(None);
-    /// assert_eq!(empty_box, GiftBox::Empty);
-    /// ```
-    pub fn fill_keeping_some(t: Option<T>) -> GiftBox<Option<T>> {
-        match t {
-            Some(t) => GiftBox::Gifts(Some(t)),
-            None => GiftBox::Empty,
-        }
-    }
-
     /// The `open()` method takes a GiftBox and returns the contents of that GiftBox.
     ///
     /// # Arguments
@@ -266,7 +187,7 @@ impl<T> GiftBox<T> {
     /// # Example
     /// ```
     ///  use giftbox::giftbox::GiftBox;
-    /// let filled_box = GiftBox::fill(Some(vec![1, 3, 5, 7]));
+    /// let filled_box = GiftBox::from(Some(vec![1, 3, 5, 7]));
     ///  assert_eq!(filled_box.open(), vec![1, 3, 5, 7]);
     /// ```
     pub fn open(self) -> T {
@@ -296,7 +217,7 @@ impl<T> GiftBox<T> {
     /// use giftbox::gifttag::GiftTag;
     /// use giftbox::giftwrap::GiftWrap;
     /// use giftbox::pattern::{ Pattern, Color };
-    /// let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+    /// let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
     /// let tag = GiftTag::write(
     ///     "Bob".to_string(),
     ///     "Sally".to_string(),
@@ -342,7 +263,29 @@ impl<T> GiftBox<T> {
     }
 }
 
-/// Implementation of From trait for GiftBox
+/// The `from(gift: Option<T>)` trait accepts an [`std::option::Option`] and returns a `GiftBox`
+/// with either `GiftBox::Gifts(t)` if `Some(t)` was provided or a `GiftBox::Empty` if
+/// `None` is provided.
+///
+/// # Arguments
+/// * `gift: Option<T>` - `gift` accepts an [`std::option::Option`]
+///
+/// # Returns
+/// Returns a `GiftBox<T>` or `None`.
+///
+/// # Example
+/// Filling a `GiftBox` with `Some(T)`:
+/// ```
+/// use giftbox::giftbox::GiftBox;
+/// let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
+/// assert_eq!(filled_box, GiftBox::Gifts(["Toys", "Candy", "Money"]));
+/// ```
+/// Filling a `GiftBox` with `None`:
+/// ```
+/// use giftbox::giftbox::GiftBox;
+/// let empty_box: GiftBox<()> = GiftBox::from(None);
+///  assert_eq!(empty_box, GiftBox::Empty);
+/// ```
 impl<T> From<Option<T>> for GiftBox<T> {
     fn from(gift: Option<T>) -> Self {
         match gift {
@@ -382,25 +325,19 @@ mod test {
 
     #[test]
     fn filling_box() {
-        let filled_box = GiftBox::fill(Some(["Toys", "Candy", "Money"]));
+        let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
         assert_eq!(filled_box, GiftBox::Gifts(["Toys", "Candy", "Money"]));
     }
 
     #[test]
     fn open_filled_box() {
-        let filled_box = GiftBox::fill(Some(vec![1, 3, 5, 7]));
+        let filled_box = GiftBox::from(Some(vec![1, 3, 5, 7]));
         assert_eq!(filled_box.open(), vec![1, 3, 5, 7]);
     }
 
     #[test]
-    fn filling_with_some() {
-        let some_filled_box = GiftBox::fill_keeping_some(Some("Chocolate"));
-        assert_eq!(some_filled_box.open(), Some("Chocolate"));
-    }
-
-    #[test]
     fn filling_with_none() {
-        let empty_box: GiftBox<()> = GiftBox::fill(None);
+        let empty_box: GiftBox<()> = GiftBox::from(None);
         assert_eq!(empty_box, GiftBox::Empty);
     }
 }
