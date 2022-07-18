@@ -9,7 +9,7 @@
 //! The [`GiftTag`] can be used on it's own in the following way:
 //! ```
 //! use giftbox::gifttag::GiftTag;
-//! let tag = GiftTag::write(
+//! let tag = GiftTag::new(
 //!      "Bob".to_string(),
 //!      "Sally".to_string(),
 //!      "Happy Cake Day!".to_string()
@@ -22,7 +22,7 @@
 //! use giftbox::gifttag::GiftTag;
 //! use giftbox::pattern::{ Pattern, Color };
 //! let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
-//! let tag = GiftTag::write(
+//! let tag = GiftTag::new(
 //!     "Bob".to_string(),
 //!     "Sally".to_string(),
 //!     "Happy Cake Day!".to_string()
@@ -49,11 +49,11 @@ use std::fmt::*;
 /// * `message` which can be a message to be included with the gift as a String.
 ///
 /// # Methods
-/// ## write(recipient, sender, message)
-/// You can write a new `GiftTag` with the [`GiftTag::write()`] method. Example:
+/// ## new(recipient, sender, message)
+/// You can make a new `GiftTag` with the [`GiftTag::new()`] method. Example:
 /// ```
 /// use giftbox::gifttag::GiftTag;
-/// let tag = GiftTag::write(
+/// let tag = GiftTag::new(
 ///      "Bob".to_string(),
 ///      "Sally".to_string(),
 ///      "Happy Cake Day!".to_string()
@@ -64,7 +64,7 @@ use std::fmt::*;
 /// You can read a `GiftTag` with the [`GiftTag::read()`] method. Example:
 /// ```
 /// use giftbox::gifttag::GiftTag;
-/// let tag = GiftTag::write(
+/// let tag = GiftTag::new(
 ///      "Bob".to_string(),
 ///      "Sally".to_string(),
 ///      "Happy Cake Day!".to_string()
@@ -81,7 +81,7 @@ pub struct GiftTag {
 }
 
 impl GiftTag {
-    /// The `write` method accepts three arguments as Strings (a recipient, a sender, and a message)
+    /// The `new` method accepts three arguments as Strings (a recipient, a sender, and a message)
     /// and returns a `GiftTag`.
     ///
     /// # Arguments
@@ -97,13 +97,13 @@ impl GiftTag {
     /// # Example
     /// ```
     /// use giftbox::gifttag::GiftTag;
-    /// let tag = GiftTag::write(
+    /// let tag = GiftTag::new(
     ///      "Bob".to_string(),
     ///      "Sally".to_string(),
     ///      "Happy Cake Day!".to_string()
     /// );
     /// ```
-    pub fn write(recipient: String, sender: String, message: String) -> GiftTag {
+    pub fn new(recipient: String, sender: String, message: String) -> GiftTag {
         GiftTag {
             recipient,
             sender,
@@ -124,7 +124,7 @@ impl GiftTag {
     ///
     /// ```
     /// use giftbox::gifttag::GiftTag;
-    /// let tag = GiftTag::write(
+    /// let tag = GiftTag::new(
     ///      "Bob".to_string(),
     ///      "Sally".to_string(),
     ///      "Happy Cake Day!".to_string()

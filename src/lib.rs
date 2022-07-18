@@ -136,7 +136,7 @@
 //! use giftbox::giftwrap::GiftWrap;
 //! use giftbox::pattern::{ Pattern, Color };
 //! let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
-//! let tag = GiftTag::write(
+//! let tag = GiftTag::new(
 //!     "Bob".to_string(),
 //!     "Sally".to_string(),
 //!     "Happy Cake Day!".to_string()
