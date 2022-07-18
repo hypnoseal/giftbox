@@ -220,31 +220,4 @@ mod test {
         let wrapped_box = filled_box.wrap(pattern, true, Some(tag));
         assert_eq!(wrapped_box.unwrap().open(), ["Toys", "Candy", "Money"]);
     }
-
-    #[test]
-    fn make_and_read_tag() {
-        let filled_box = GiftBox::from(Some(["Toys", "Candy", "Money"]));
-        let tag = GiftTag::new(
-            "Bob".to_string(),
-            "Sally".to_string(),
-            "Happy Cake Day!".to_string(),
-        );
-        let pattern = Pattern::NewsPaper;
-        let wrapped_box = filled_box.wrap(pattern, true, Some(tag));
-        assert_eq!(
-            wrapped_box.read_tag(),
-            "You read the nice Gift Tag and it says:\nTo: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
-        );
-    }
-
-    #[test]
-    fn attempt_to_read_none_tag() {
-        let wrapped_nothing = GiftWrap {
-            contents: (),
-            pattern: Pattern::KraftPaper { color: Color::Red },
-            has_bow: false,
-            tag: None,
-        };
-        assert_eq!(wrapped_nothing.read_tag(), "There was no tag to read.");
-    }
 }

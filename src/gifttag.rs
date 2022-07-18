@@ -152,4 +152,19 @@ impl fmt::Display for GiftTag {
 }
 
 #[cfg(test)]
-mod test {}
+mod test {
+    use crate::gifttag::GiftTag;
+
+    #[test]
+    fn new_and_read_tag() {
+        let tag = GiftTag::new(
+            "Bob".to_string(),
+            "Sally".to_string(),
+            "Happy Cake Day!".to_string(),
+        );
+        assert_eq!(
+            tag.read(),
+            "You read the nice Gift Tag and it says:\nTo: Bob,\nFrom: Sally,\nMessage: Happy Cake Day!"
+        );
+    }
+}
